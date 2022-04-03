@@ -479,7 +479,7 @@ h3.title.subtitle {
     margin-top: 0.2em;
 }
 h3.title {
-    font-size: 1.8em;
+    font-size: 1.6em;
     text-align: center;
     color: #A9A9A9;
     font-weight: 200;
@@ -943,7 +943,8 @@ img.zoom-img:hover,.portfolio-grids:hover img.zoom-img{
     padding: 2em 0;
     text-align: center;
     /*background: #B3ADF5;*/
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    /* border-top: 1px solid rgba(0, 0, 0, 0.1); */
+    border-top: 1px solid rgb(0 0 0 / 28%);
 }
 /*.footer p{*/
 /*    color: #fff;*/
@@ -1801,6 +1802,9 @@ h3.side-title {
 .news-list li span:nth-child(2) {
     float: right;
 }
+.news-list li {
+    font-size: 1.1em
+}
 
 .contents .news-btn {
     width: 100%;
@@ -1812,6 +1816,7 @@ h3.side-title {
 
 .contents p {
     text-indent: 2em;
+    font-size: 17px;
 }
 
 .contents .news-btn span:nth-child(2) {
