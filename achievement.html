@@ -83,7 +83,7 @@
             <div class="contents">
                 <button class="btn news-btn" data-toggle="collapse" data-target="#collapse-001">
                     <span>
-                        NeurIPS 2022——基于掩码匹配Transformer的小样本分割方法
+                        NeurIPS 2022 —— 基于掩码匹配Transformer的小样本分割方法
                     </span> 
                     <span>
                     2022-10-09
@@ -207,7 +207,7 @@
             <div class="contents">
                 <button class="btn news-btn" data-toggle="collapse" data-target="#collapse-002">
                     <span>
-                        NeurIPS 2022——通过Regional Objectness挖掘未见类：一种增量分割的简单基线方法
+                        NeurIPS 2022 —— 通过Regional Objectness挖掘未见类：一种增量分割的简单基线方法
                     </span> 
                     <span>
                     2022-10-09
@@ -313,6 +313,214 @@
                         下表是对于超参数(Micro机制的K，标签重建中的阈值τ)的消融实验，可以观察到本问题提出的方法对于超参数的选择并不很敏感。
                     </p>
                     <br><img src="./images/achievement/2022-NeurIPS-2/10.png" alt="" class="content-img">
+                    
+                </div>
+            </div>
+
+            <!-- 成果3 -->
+            <div class="contents">
+                <button class="btn news-btn" data-toggle="collapse" data-target="#collapse-003">
+                    <span>
+                        ECCV 2022 —— 一种将弱监督信号转化为噪声监督信号的目标检测方法
+                    </span> 
+                    <span>
+                    2022-10-11
+                    </span>
+                </button>
+                <div id="collapse-003" class="collapse">
+                    <!-- 大标题 -->
+                    <div style="padding-top: 10px;padding-bottom: 10px;">
+                        <span style="font-weight: 800; font-size: 25px;padding-top: 15px;">1. Abstract</span>
+                    </div>
+                    <p>
+                        弱监督物体检测任务（WSOD）旨在仅利用图像级别的类别标签来训练一个检测器。近年来，一些弱监督检测方法试图从原始的WSOD模型中挑选高质量的伪标注来提升模型性能。然而，这些方法仅仅根据图片及的线索，将带有伪标注的训练集数据集划分为有标签集和无标签集，而忽略了每一个检测框的分类信息和定位信息，因此信息没有得到充分利用。在本工作中，本文提出将弱监督信号转化为带噪监督信号的目标检测算法（W2N），该算法包含两个迭代训练的子模块。本文的算法充分考虑了每一个检测框具有的信息，并提出了一个正则化损失来缓解WSOD会集中注意到"discriminative part"的问题。实验结果显示，本文的方法在PASCAL VOC, COCO等数据集上都达到了SOTA。图1为不同WSOD方法的训练范式。
+                    </p>
+                    <br><img src="./images/achievement/2022-ECCV-1/1.png" alt="" class="content-img">
+                    <p>
+                        本文的主要贡献如下：
+                    </p>
+                    <p>
+                        （1）本文提出了一种新的多阶段WSOD范式，它将多阶段弱监督物体检测问题建模为噪声标签物体检测问题求解，以减少低质量的伪标签对模型的负面影响。
+                    </p>
+                    <p>
+                        （2）为了解决带噪声标签物体检测的训练问题，本文提出了一个迭代学习框架，包括定位适应模块和半监督学习模块，从而提高了伪标签的质量并提升了检测器的性能。
+                    </p>
+                    <p>
+                        （3）本文在不同基准数据集上验证了本文的方法的有效性。实验结果表明，本文的方法可以有效提升各个单阶段WSOD模型的性能，并在WSOD任务上达到了到SOTA。
+                    </p>
+
+
+                    <!-- 大标题 -->
+                    <div style="padding-top: 10px;padding-bottom: 10px;">
+                        <span style="font-weight: 800; font-size: 25px;padding-top: 15px;">2. Method</span>
+                    </div>
+                    <br><img src="./images/achievement/2022-ECCV-1/2.png" alt="" class="content-img">
+                    <!-- 小标题 -->
+                    <div style="padding-bottom: 10px;padding-top: 10px;">
+                        <span style="font-weight: 800; font-size: 20px;">2.1 Overview</span>
+                    </div>
+                    <p>
+                        首先在弱监督数据集上训练一个基础的弱监督检测网络。 接着利用训练好的弱监督检测网络，对训练集标伪标签。本文称这个带伪标签的训练集为“带噪声标注的数据集”。为了在这样的噪声数据集上训练物体检测器，本文提出了一个新的训练框架W2N，它循环迭代执行定位适应模块和半监督学习模块，以产生更加准确的伪标签，并利用更新后的伪标签监督训练一个更好的物体检测器。整体训练流程如图2所示。
+                    </p>
+                    <!-- 小标题 -->
+                    <div style="padding-bottom: 10px;padding-top: 10px;">
+                        <span style="font-weight: 800; font-size: 20px;">2.2 Noisy Label Generation</span>
+                    </div>
+                    <p>
+                        首先在弱监督数据集上训练一个基础的弱监督检测网络。 用该检测网络在训练集上预测检测框，并将输出的分类分数低于给定阈值的检测框删除，剩下的检测框作为初始的伪标签。在本文中，分别采用OICR+REG，CASD和LBBA作为基础的弱监督检测网络。
+                    </p>
+                    <!-- 小标题 -->
+                    <div style="padding-bottom: 10px;padding-top: 10px;">
+                        <span style="font-weight: 800; font-size: 20px;">2.3 Learning Detector with Noisy Annotations</span>
+                    </div>
+                    <p>
+                        本文提出了一个训练框架W2N，它在定位适应模块和半监督学习模块之间反复进行迭代。以下各小节将详细说明这两个模块。
+                    </p>
+                    <div style="padding-bottom: 10px;padding-top: 10px;">
+                        <span style="font-weight: 800; font-size: 15px;">2.3.1 Localization Adaptation Module</span>
+                    </div>
+                    <br><img src="./images/achievement/2022-ECCV-1/3.png" alt="" class="content-img">
+                    <p>
+                        对于位于discriminative part的伪监督框，在训练时，在其外侧生成一个预选框，考察该预选框位置的变化。本文发现，在训练的初始阶段，该预选框首先会往物体所在的位置移动；然而随着训练的进行，预选框最终会靠近该内部的伪监督框，如图3所示。本文利用这个现象，将该预选框中间回归的结果保存，作为额外的监督信息，计算正则化loss训练网络模型。
+                    </p>
+                    <br><img style="width: 600px;" src="./images/achievement/2022-ECCV-1/4.png" alt="" class="content-img">
+                    <br><img style="width: 500px;" src="./images/achievement/2022-ECCV-1/5.png" alt="" class="content-img">
+                    <div style="padding-bottom: 10px;padding-top: 10px;">
+                        <span style="font-weight: 800; font-size: 15px;">2.3.2 Semi-Supervised Learning Module</span>
+                    </div>
+                    <p>
+                        在该模块中，本文设计了一个混合级数据集划分方法以及一个基于伪标签的半监督训练算法。
+                    </p>
+                    <p>
+                        在SoS中，数据集划分以图片作为最小单元。本文认为，由于图片中往往存在多个物体和多个伪监督框，因此以伪监督框本身为划分单元更能充分利用高质量的伪监督、忽略低质量的伪监督，因此提出了实例级划分方法。
+                    </p>
+                    <br><img style="width: 500px;" src="./images/achievement/2022-ECCV-1/6.png" alt="" class="content-img">
+                    <p>
+                        在该方法中，根据每个伪监督框上累计的loss的大小，将loss较低的伪监督框保留，剩余的部分删去。
+                    </p>
+                    <p>
+                        本文发现存在部分伪监督框的分类信息准确，但定位信息不准；相似的，存在部分伪监督框定位信息准确，但分类信息不准。为了更加充分利用每个伪监督框准确的信息，本文进一步提出双任务实例级划分方法。具体而言，对于每个伪监督框，分别计算其分类loss和回归loss，分别按照其对应任务的loss的值对其划分。对于分类信息准确而定位信息不准的伪监督，在后续的半监督检测流程时，只用其训练分类；反之，只利用其训练回归。
+                    </p>
+                    <br><img style="width: 500px;" src="./images/achievement/2022-ECCV-1/7.png" alt="" class="content-img">
+                    <p>
+                        本文采用unbiased teacher作为半监督物体检测框架。将上述数据集划分得到的clean set作为labeled set，noisy set作为unlabeled set，执行半监督检测流程。
+                    </p>
+                    
+
+                    <!-- 大标题 -->
+                    <div style="padding-top: 10px;padding-bottom: 10px;">
+                        <span style="font-weight: 800; font-size: 25px;padding-top: 15px;">3. Experiments</span>
+                    </div>
+                    <!-- 小标题 -->
+                    <div style="padding-bottom: 10px;padding-top: 10px;">
+                        <span style="font-weight: 800; font-size: 20px;">3.1 Experimental results</span>
+                    </div>
+                    <p>
+                        本文分别以OICR+REG，CASD和LBBA作为基础的弱监督检测模型来搭建提出的W2N训练方法，以下是在PASCAL VOC 2007上的实验结果
+                    </p>
+                    <br><img src="./images/achievement/2022-ECCV-1/8.png" alt="" class="content-img">
+                    <br><img src="./images/achievement/2022-ECCV-1/9.png" alt="" class="content-img">
+                    <p>
+                        实验结果表明，本文提出的W2N训练方式可以有效提升基础弱监督检测网络的性能，性能越了其他WSOD方法。
+                    </p>
+                    <br><img src="./images/achievement/2022-ECCV-1/10.png" alt="" class="content-img">
+                    <p>
+                        图4中，第一行为LBBA的可视化结果，第二行为LBBA+W2N的可视化结果，第三行为真实的标注框。
+                    </p>
+                    <!-- 小标题 -->
+                    <div style="padding-bottom: 10px;padding-top: 10px;">
+                        <span style="font-weight: 800; font-size: 20px;">3.2 Ablation Study</span>
+                    </div>
+                    <p>
+                        下表展示了本文提出的不同模块对性能的影响
+                    </p>
+                    <br><img style="width: 500px;" src="./images/achievement/2022-ECCV-1/11.png" alt="" class="content-img">
+                    <p>
+                        下表展示了迭代次数对模型性能的影响
+                    </p>
+                    <br><img style="width: 500px;" src="./images/achievement/2022-ECCV-1/12.png" alt="" class="content-img">
+                    
+                </div>
+            </div>
+
+            <!-- 成果4 -->
+            <div class="contents">
+                <button class="btn news-btn" data-toggle="collapse" data-target="#collapse-004">
+                    <span>
+                        NeurIPS 2022 —— 单样本生成式域迁移
+                    </span> 
+                    <span>
+                    2022-10-11
+                    </span>
+                </button>
+                <div id="collapse-004" class="collapse">
+                    <!-- 大标题 -->
+                    <div style="padding-top: 10px;padding-bottom: 10px;">
+                        <span style="font-weight: 800; font-size: 25px;padding-top: 15px;">1. Abstract</span>
+                    </div>
+                    <p>
+                        单样本生成式域迁移旨在，在只使用一个参考图像的条件下，在只使用一个参考图像的条件下。然而，对于迁移后的生成器来说， (i) 生成类似于预训练生成器内容丰富的图像，同时 (ii) 忠实地获取目标域的参考图像的属性和样式。在本文中，我们介绍了一种新的单样本生成式域迁移方法，即 DiFa，用于多样的生成和准确的迁移。对于全局水平的迁移，我们利用差异参考图像的 CLIP 编码与源图像来约束目标生成器。对于局部适应，我们引入基于注意力机制的风格损失，它自适应的每个迁移图像块及其对应的参考图像块。为了更好的多样化生成，我么引入选择性跨域一致性来保持编辑隐空间中的域共享属性继承多样性预训练的生成器。大量实验表明我们的方法在量化和可视化上均达到了最优，特别是对于域间差距较大的庆幸。此外，我们的 DiFa 可以轻松扩展到零样本生成式域迁移任务中。
+                    </p>
+                    <br><img src="./images/achievement/2022-NeurIPS-3/1.png" alt="" class="content-img">
+
+
+                    <!-- 大标题 -->
+                    <div style="padding-top: 10px;padding-bottom: 10px;">
+                        <span style="font-weight: 800; font-size: 25px;padding-top: 15px;">2. Method</span>
+                    </div>
+                    <br><img src="./images/achievement/2022-NeurIPS-3/2.png" alt="" class="content-img">
+                    <!-- 小标题 -->
+                    <div style="padding-bottom: 10px;padding-top: 10px;">
+                        <span style="font-weight: 800; font-size: 20px;">2.1 全局水平域迁移</span>
+                    </div>
+                    <p>
+                        给定在源域A上预训练的生成器GA，以及来自目标域B的引导图Itar，首先使用CLIP编码器计算域间向量：
+                    </p>
+                    <br><img style="width: 250px;" src="./images/achievement/2022-NeurIPS-3/3.png" alt="" class="content-img">
+                    <p>
+                        然后计算训练过程中样本间的偏移向量及全局损失函数
+                    </p>
+                    <br><img style="width: 400px;" src="./images/achievement/2022-NeurIPS-3/4.png" alt="" class="content-img">
+                    <!-- 小标题 -->
+                    <div style="padding-bottom: 10px;padding-top: 10px;">
+                        <span style="font-weight: 800; font-size: 20px;">2.2 局部水平域迁移</span>
+                    </div>
+                    <p>
+                        尽管域间向量可以捕获引导图中的全局水平的域代表性特征，而在CLIP编码空间中，局部属性和风格却经常被忽略。因此，只使用全局水平损失函数训练不能准确获取引导图中的局部信息。为了解决这个问题，我们提出了基于注意力机制的风格损失函数来帮助GB准确获取局部代表性特征。受风格迁移任务重风格-内容对齐的启发，我们设计局部损失函数，让迁移图中的每一块都能自适应的寻找并对齐引导图中的对应风格，损失函数如下所示：
+                    </p>
+                    <br><img style="width: 500px;" src="./images/achievement/2022-NeurIPS-3/5.png" alt="" class="content-img">
+                    <br><img style="width: 200px;" src="./images/achievement/2022-NeurIPS-3/6.png" alt="" class="content-img">
+                    <!-- 小标题 -->
+                    <div style="padding-bottom: 10px;padding-top: 10px;">
+                        <span style="font-weight: 800; font-size: 20px;">2.2 自适应生成多样性保持</span>
+                    </div>
+                    <p>
+                        对于单样本生成式域迁移任务来说，生成多样的图片也十分重要。为了达到这个目的，我们首先把IA和IB均映射到隐空间，获取对应的隐编码。并在训练的过程中维持两个队列，分别存放来自域A和B的隐编码，并实时更新两个队列平均向量之差。根据这个差，计算自适应跨域一致性损失函数：
+                    </p>
+                    <br><img style="width: 500px;" src="./images/achievement/2022-NeurIPS-3/7.png" alt="" class="content-img">
+
+
+                    <!-- 大标题 -->
+                    <div style="padding-top: 10px;padding-bottom: 10px;">
+                        <span style="font-weight: 800; font-size: 25px;padding-top: 15px;">3. Experiments</span>
+                    </div>
+                    <!-- 小标题 -->
+                    <div style="padding-bottom: 10px;padding-top: 10px;">
+                        <span style="font-weight: 800; font-size: 20px;">3.1 Experimental results</span>
+                    </div>
+                    <p>
+                        图3是本文提出的DiFa在源域为FFHQ和AFHQ-Cat，在目标域为不同引导图的可视化结果。表1是DiFa在源域为FFHQ和AFHQ-Cat，目标域为MetFaces和AFHQ-Wild的域迁移结果。从图3和表1可以看出，我们的方法在定量和定性方面均达到了最优。具体来说，Few-Shot Adaption产生了严重模式坍塌现象。StyleGAN-NADA不能准确的保持源域的属性，因此多样性较低。Mind The Gap对于域间差距较大的情况处理较差，有明显的瑕疵。
+                    </p>
+                    <br><img src="./images/achievement/2022-NeurIPS-3/8.png" alt="" class="content-img">
+                    <br><img src="./images/achievement/2022-NeurIPS-3/9.png" alt="" class="content-img">
+                    <!-- 小标题 -->
+                    <div style="padding-bottom: 10px;padding-top: 10px;">
+                        <span style="font-weight: 800; font-size: 20px;">3.2 Ablation Studies</span>
+                    </div>
+                    <p>
+                        下表是对于两个主要损失函数SCC(Selective Cross-domain Consistency), AP(Attentive Style)的消融实验，能够比较直观地体现每个函数带来的性能提升。
+                    </p>
+                    <br><img src="./images/achievement/2022-NeurIPS-3/10.png" alt="" class="content-img">
                     
                 </div>
             </div>
