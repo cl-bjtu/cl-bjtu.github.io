@@ -22,12 +22,12 @@
     <script src="js/jquery-1.11.1.min.js"></script>
     <!-- //js -->
     <!--web-fonts-->
-    <!-- <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic'
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic'
           rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Dosis:400,200,300,500,600,700,800' rel='stylesheet'
-          type='text/css'> -->
-    <link rel="text/css" href="./css/RobotoCondensed400300300italic400italic700700italic.css">
-    <link rel="text/css" href="./css/Dosis400200300500600700800.css">
+          type='text/css'>
+    <!-- <link rel="text/css" href="./css/RobotoCondensed400300300italic400italic700700italic.css">
+    <link rel="text/css" href="./css/Dosis400200300500600700800.css"> -->
     <!--//web-fonts-->
     <!--circle-chart-->
     <script src="js/jquery.circlechart.js"></script>
@@ -522,6 +522,100 @@
                     </p>
                     <br><img src="./images/achievement/2022-NeurIPS-3/10.png" alt="" class="content-img">
                     
+                </div>
+            </div>
+
+            <!-- 成果5 -->
+            <div class="contents">
+                <button class="btn news-btn" data-toggle="collapse" data-target="#collapse-005">
+                    <span>
+                        ECCV 2022 —— 基于自提升稠密监督信息的少样本视觉自注意力网络
+                    </span> 
+                    <span>
+                    2022-10-12
+                    </span>
+                </button>
+                <div id="collapse-005" class="collapse">
+                    <!-- 大标题 -->
+                    <div style="padding-top: 10px;padding-bottom: 10px;">
+                        <span style="font-weight: 800; font-size: 25px;padding-top: 15px;">1. Abstract</span>
+                    </div>
+                    <p>
+                        视觉自注意力网络（ViTs）的少样本学习能力值得挖掘，但现阶段很少有相关工作探索这一问题。在本工作中，我们首先通过大量实验发现，基于相同的少样本学习框架，例如Meta-Baseline（ICCV 2021），直接将CNN特征提取器替换成一个ViT特征提取网络会带来严重的性能下降。进而，我们对这一问题进行了充分的分析，发现问题核心在于，由于缺少和CNN一样的归纳偏置，ViT通常会在少样本学习的训练范式下学到一些低质量的邻域区块相关性信息，这一点对于最终的少样本分类精度影响很大。为了解决这一问题，我们针对ViT，提出了一个简单但是有效的少样本分类训练框架Self-promoted sUpervisioN（SUN）。SUN首先在相应的少样本分类数据集上预训练一个ViT，并用其为每一组输入中的所有图像区块生成位置相关的监督信息，用来指导另一个相同结构的ViT的训练，使得新训练的ViT能够识别出相邻的区块是相同类别的还是不同类别的，从而促进邻域区块相关性的学习。引入这种稠密的监督信息能够有效改善ViT在少样本分类上的物体定位与识别能力，从而学到泛化能力更强的特征提取网络。为了进一步提升位置相关的监督信息的质量，我们引入了两个技术：背景过滤模块和空间对齐增广，从而进一步提升ViT在少样本分类上的效果。
+                    </p>
+                    <p>
+                        本文的贡献如下：
+                    </p>
+                    <p>
+                        （1） 分析了现有的多种ViT在少样本分类任务下的性能，并指出问题原因：缺少归纳偏置和低质量的邻域区块相关性学习效果。
+                    </p>
+                    <p>
+                        （2） 为了改善ViT在少样本分类任务下的性能，我们提出了Self-promoted sUpervisioN (SUN)，该方法主要通过引入来自相同数据集上预训练的教师模型输出的稠密标签，通过空间对齐增广和背景过滤模块进行增强，从而使得ViT学到一定程度的归纳偏置，并改善邻域区块相关性学习效果。
+                    </p>
+                    <p>
+                        （3） 第一个针对多种ViT在少样本分类任务上进行分析并提出优化的解决方案的工作，为后续的少样本分类方法提供了一个简单但是足够可靠的基线方案。
+                    </p>
+
+
+                    <!-- 大标题 -->
+                    <div style="padding-top: 10px;padding-bottom: 10px;">
+                        <span style="font-weight: 800; font-size: 25px;padding-top: 15px;">2. Method</span>
+                    </div>
+                    <br><img src="./images/achievement/2022-ECCV-2/1.png" alt="" class="content-img">
+                    <!-- 小标题 -->
+                    <div style="padding-bottom: 10px;padding-top: 10px;">
+                        <span style="font-weight: 800; font-size: 20px;">2.1 Meta-Training Phase</span>
+                    </div>
+                    <p>
+                        SUN的元训练阶段的目的是在训练集上学到一个特征表达能力较好，泛化性能较强的元学习器 f，使得 f 在开始元微调阶段前即拥有快速适应到新类别上的能力。 SUN的主要设计想法是引入一个来自在训练集上经过预训练的教师模型生成的位置相关稠密监督信息，目的是强化和加速图像区块邻域相关性的学习，从而能够提高在数据缺乏的条件下 ViT 的学习效率。具体来说，基于在训练集上预训练过的一个ViT，SUN首先为输入图像中的每个区块生成分类分数，如下所示。
+                    </p>
+                    <br><img src="./images/achievement/2022-ECCV-2/2.png" alt="" class="content-img">
+                    <p>
+                        然后根据这个分数通过label smoothing的方法生成稠密的监督信息。该监督信息与原始的图像分类标签一起，用来训练一个结构相同的ViT，损失函数如下所示。
+                    </p>
+                    <br><img src="./images/achievement/2022-ECCV-2/3.png" alt="" class="content-img">
+                    <!-- 小标题 -->
+                    <div style="padding-bottom: 10px;padding-top: 10px;">
+                        <span style="font-weight: 800; font-size: 20px;">2.2 Meta-Tuning Phase</span>
+                    </div>
+                    <p>
+                        元微调阶段的目的是在训练集采样出的多个 “N-way K-shot” 任务上充分微调预训练好的元学习器 f，使得 f 能快速适配到仅有少数标注的新类别上。因此，不失一般性，我们选择引入多种简单但是有效的元微调策略来验证性能，例如 Meta-Baseline、FEAT 和 DeepEMD。
+                    </p>
+
+
+                    <!-- 大标题 -->
+                    <div style="padding-top: 10px;padding-bottom: 10px;">
+                        <span style="font-weight: 800; font-size: 25px;padding-top: 15px;">3. Experiments</span>
+                    </div>
+                    <!-- 小标题 -->
+                    <div style="padding-bottom: 10px;padding-top: 10px;">
+                        <span style="font-weight: 800; font-size: 20px;">3.1 Experimental results</span>
+                    </div>
+                    <p>
+                        我们在miniImageNet，tieredImageNet和CIFAR-FS三种不同的少样本分类数据集上与之前的最优方法进行比较。需要注意的是以往的方法都是基于ResNet进行训练。如下表所示，我们的方法在三种不同的数据集上均达到了CNN-based方法的效果，说明SUN确实能够有效改善ViT在少样本分类上的性能。
+                    </p>
+                    <br><img src="./images/achievement/2022-ECCV-2/4.png" alt="" class="content-img">
+                    <p>
+                        我们对使用与不使用SUN训练的ViT抽取的特征进行了t-SNE可视化。与不使用SUN的ViT相比，使用SUN训练的ViT能够在新类别上抽出聚类效果更好的特征，说明SUN在少样本分类任务上提升了ViT的泛化能力。
+                    </p>
+                    <br><img src="./images/achievement/2022-ECCV-2/5.png" alt="" class="content-img">
+                    <!-- 小标题 -->
+                    <div style="padding-bottom: 10px;padding-top: 10px;">
+                        <span style="font-weight: 800; font-size: 20px;">3.2 Ablation Studies</span>
+                    </div>
+                    <p>
+                        我们针对SUN的几个核心模块进行了消融实验，以上所有模块对ViT的少样本分类都有促进效果。
+                    </p>
+                    <br><img src="./images/achievement/2022-ECCV-2/6.png" alt="" class="content-img">
+                    <p>
+                        我们的SUN还可以与多种不同的少样本分类方法兼容，将其作为Meta-Tuning阶段，从而进一步提升性能。
+                    </p>
+                    <br><img src="./images/achievement/2022-ECCV-2/7.png" alt="" class="content-img">
+                    <p>
+                        不同于以往的CNN-based方法，SUN在更长的训练中收益更多。
+                    </p>
+                    <br><img src="./images/achievement/2022-ECCV-2/8.png" alt="" class="content-img">
+
                 </div>
             </div>
             
