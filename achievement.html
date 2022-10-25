@@ -618,6 +618,120 @@
 
                 </div>
             </div>
+
+            <!-- 成果6 -->
+            <div class="contents">
+                <button class="btn news-btn" data-toggle="collapse" data-target="#collapse-006">
+                    <span>
+                        TPAMI 2022 —— 基于双记忆字典的人脸图像盲复原
+                    </span> 
+                    <span>
+                    2022-10-25
+                    </span>
+                </button>
+                <div id="collapse-006" class="collapse">
+                    <!-- 大标题 -->
+                    <div style="padding-top: 10px;padding-bottom: 10px;">
+                        <span style="font-weight: 800; font-size: 25px;padding-top: 15px;">1. Abstract</span>
+                    </div>
+                    <p>
+                        图像盲复原任务由于退化类型复杂且无法有效模拟，导致现有方法性能提升有限。而人脸图像由于具有极强的结构性先验，每个人都拥有相似的眼睛、鼻子、和嘴结构，但是每个人又同时具有自己独特的结构信息（例如瞳孔颜色等）。对于人脸图像的盲复原，由于皮肤区域大部分趋于平滑，因此人们更关注于面部五官的复原效果。基于此，提出基于双记忆网络的人脸图像盲复原方法。通过在训练过程中，记忆和存储通用的五官结构特征以及身份相关的特定五官结构特征，用来引导任意低质量人脸图像的通用复原和特定复原过程。
+                    </p>
+                    <p>
+                        本文的贡献如下：
+                    </p>
+                    <p>
+                        （1）与现有方法直接学习从低质量到高质量的复原映射不同，本文通过外部学习的高质量特征字典来促进人脸图像盲复原过程；
+                    </p>
+                    <p>
+                        （2）为了在一个框架中处理低质量图像既有引导图又无引导图的情况，本文提出学习通用字典存储人五官相似的结构特征以及特定字典存储当前身份相关的结构特征。每个人共享通用字典，且独有身份相关的特定字典。
+                    </p>
+                    <p>
+                        （3）为了结合双记忆字典，本文提出字典迁移模块，能够有效利用双字典的优势，并且当引导图不存在时，也能够有效对人脸图像复原。
+                    </p>
+
+
+                    <!-- 大标题 -->
+                    <div style="padding-top: 10px;padding-bottom: 10px;">
+                        <span style="font-weight: 800; font-size: 25px;padding-top: 15px;">2. Method</span>
+                    </div>
+
+                    <p>
+                        下图为DMDNet的整体流程图以及双记忆字典读取模块。
+                    </p>
+                    <br><img src="./images/achievement/2022-TPAMI-1/1.png" alt="" class="content-img">
+
+                    <br><img style="width: 500px;" src="./images/achievement/2022-TPAMI-1/2.png" alt="" class="content-img">
+
+                    <p>
+                        主要包含两个过程，1）字典构建过程：包含记忆任意身份的通用五官纹理的通用特征，以及身份相关的特定特征；2）引导复原过程：利用构建的字典，将记忆的特征引导任意低质量图像复原。当输入图像的引导图身份未知时，只利用通用特征即可进行复原。反之，若输入图像的身份已知并且具有多张高质量相同身份的人脸图像，通过网络提取身份相关的特定字典特征，结合通用字典特征，一同对其进行引导复原，在输入图像退化严重时，使得复原结果更像本人。
+                    </p>
+                    <p>
+                        （a）字典的构建和优化过程为：	
+                    </p>
+                    <p>
+                        初始随机输入P张高质量通用人脸图像，对每一个通用特征字典构建P项通用字典项，每项通用字典项包含通用索引值和通用特征值；P为正整数；
+                    </p>
+                    <p>
+                        对初始通用字典项前向更新：
+                    </p>
+                    <br><img style="width: 500px;" src="./images/achievement/2022-TPAMI-1/3.png" alt="" class="content-img">
+                    <p>
+                        其中value*表示前向更新后的通用特征值，key*表示前向更新后的通用索引值；γv表示特征值可学习优化参数，γk表示索引值可学习优化参数，value表示已构建的通用特征值，key表示已构建的通用索引值，valuegt表示新输入高质量通用人脸图像的通用特征值，keygt表示新输入高质量通用人脸图像的通用索引值；
+                    </p>
+                    <p>
+                        再对前向更新后通用字典项反向更新：
+                    </p>
+                    <p>
+                        通过重建损失函数Lrec的梯度反向传播，对前向更新后通用字典项进一步优化，得到反向更新后最终通用字典项：
+                    </p>
+                    <br><img style="width: 350px;" src="./images/achievement/2022-TPAMI-1/4.png" alt="" class="content-img">
+                    <p>
+                        式中η表示学习率。
+                    </p>
+                    <p>
+                        (b) 字典特征迁移模块
+                    </p>
+                    <p>
+                        字典特征迁移模块获得遍历后字典特征的方法包括：
+                    </p>
+                    <br><img style="width: 300px;" src="./images/achievement/2022-TPAMI-1/5.png" alt="" class="content-img">
+                    <p>
+                        式中Fp为遍历后字典特征，Q为退化人脸部位特征的查询值，K为通用特征字典或特定特征字典的索引值，V为通用特征字典或特定特征字典的特征值，d表示常量。
+                    </p>
+                    <p>
+                        此外设置置信度预测模块根据不同退化程度的输入对字典依赖程度不同，获得自适应融合特征的过程包括：
+                    </p>
+                    <br><img style="width: 500px;" src="./images/achievement/2022-TPAMI-1/6.png" alt="" class="content-img">
+                    <p>
+                        式中目标表示自适应融合特征，Fdp为退化人脸部位特征，Fconf为置信度预测网络，Θcon为置信度预测网络可学习参数；
+                    </p>
+
+                    <!-- 大标题 -->
+                    <div style="padding-top: 10px;padding-bottom: 10px;">
+                        <span style="font-weight: 800; font-size: 25px;padding-top: 15px;">3. Experiments</span>
+                    </div>
+                    <!-- 小标题 -->
+                    <div style="padding-bottom: 10px;padding-top: 10px;">
+                        <span style="font-weight: 800; font-size: 20px;">3.1 量化结果对比</span>
+                    </div>
+                    <br><img src="./images/achievement/2022-TPAMI-1/7.png" alt="" class="content-img">
+                    <br><img style="width: 600px;" src="./images/achievement/2022-TPAMI-1/8.png" alt="" class="content-img">
+                    <p>
+                        表1对比了本文通用复原方法（无同一人引导图）与现有方法比较结果，表2为特定复原方法（有同一人引导图）与现有方法对比结果。可以发现，只用通用字典的情况下，本文量化结果与其他对比方法均具有一定可比性，当引入同一人的特定字典时，从身份相关的量化结果看（Id项）复原效果会更接近本人。
+                    </p>
+                    <!-- 小标题 -->
+                    <div style="padding-bottom: 10px;padding-top: 10px;">
+                        <span style="font-weight: 800; font-size: 20px;">3.2 超分4倍和8倍的视觉复原结果</span>
+                    </div>
+                    <p>
+                        下图为超分8倍的通用复原和特定复原效果对比。可以发现本文方法能够有效提升复原质量，当有引导图时，能够更好的保留与身份相关的特征（例如瞳孔颜色等）。
+                    </p>
+                    <br><img src="./images/achievement/2022-TPAMI-1/9.png" alt="" class="content-img">
+                    <br><img style="width: 400px;" src="./images/achievement/2022-TPAMI-1/10.png" alt="" class="content-img">
+
+                </div>
+            </div>
             
         </div>
     </div>
